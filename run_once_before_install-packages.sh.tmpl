@@ -1,0 +1,14 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/bin/sh
+#sudo apt install ripgrep
+echo "linux"
+{{ else if eq .chezmoi.os "darwin" -}}
+#!/bin/sh
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+curl -sS https://starship.rs/install.sh | sh -s -- -y
+
+brew bundle --no-lock --file=/dev/stdin <<EOF
+brew "starship"
+EOF
+{{ end -}}
