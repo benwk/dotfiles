@@ -1,0 +1,18 @@
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[user]
+	name = {{ .git.name }}
+	email = {{ .git.email }}
+	signingkey = {{ .git.signingkey }}
+[core]
+	excludesfile = ~/.gitignore_global
+[commit]
+	template = ~/.stCommitMsg
+	gpgsign = true
+[gpg]
+	program = /usr/local/bin/gpg
+[pull]
+	rebase = true
