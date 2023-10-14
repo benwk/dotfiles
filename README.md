@@ -2,7 +2,7 @@
 
 ## chezmoi.toml
 
-```
+```toml
 [data.git]
   name = "Ben Z."
   email = "z@benwk.com"
