@@ -4,7 +4,7 @@ git clone https://github.com/wbingli/zsh-wakatime.git ${ZSH_CUSTOM:-~/.oh-my-zsh
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 curl -sS https://starship.rs/install.sh | sudo sh -s -- -y
-sudo apt install snapd wget git
+sudo apt install snapd wget git zip
 sudo snap install node --classic
 curl -fsSL https://bun.sh/install | bash
 {{ else if eq .chezmoi.os "darwin" -}}
