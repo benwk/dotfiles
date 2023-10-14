@@ -41,7 +41,8 @@ sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.g
 sudo apt update && sudo apt install 1password-cli
 
 # 1password setup account
-op account add --address $OP_SUBDOMAIN.1password.com --email $OP_EMAIL --signin
+op account add --address $OP_SUBDOMAIN.1password.com --email $OP_EMAIL
+eval $(op signin --account $OP_SUBDOMAIN)
 
 # ssh config
 op read op://$OP_VAULT/$OP_SSH/privatekey > ~/.ssh/$OP_SSH
