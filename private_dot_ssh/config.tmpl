@@ -31,7 +31,7 @@ Host home
     ProxyCommand /opt/homebrew/bin/cloudflared access ssh --hostname %h --service-token-id $CF_ACCESS_CLIENT_ID --service-token-secret $CF_ACCESS_CLIENT_SECRET 
 
 # machine-specific configuration
-{{ if eq .chezmoi.os "darwin" }}
+{{ if ne .chezmoi.os "darwin" }}
 Include ~/.orbstack/ssh/config
 Host bite
     HostName orb
@@ -54,5 +54,5 @@ Host delay
     ProxyCommand '/Applications/OrbStack.app/Contents/Frameworks/OrbStack Helper.app/Contents/MacOS/OrbStack Helper' ssh-proxy-fdpass {{ .path.home }}
     ProxyUseFdpass yes
 {{ end }}
-{{ if eq .chezmoi.os "linux" }}
+{{ if ne .chezmoi.os "linux" }}
 {{ end }}

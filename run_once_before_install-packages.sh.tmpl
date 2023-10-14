@@ -1,7 +1,7 @@
 {{ if eq .chezmoi.os "linux" -}}
 #!/bin/sh
 
-# basic package
+# basic packages
 sudo apt install snapd wget git zip jq
 
 # ohmyzsh configs
@@ -12,9 +12,10 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 # starship
 curl -sS https://starship.rs/install.sh | sudo sh -s -- -y
 
-# node package
+# node packages
 sudo snap install node --classic
 curl -fsSL https://bun.sh/install | bash
+npm install -g trash-cli
 
 # 1password
 curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg

@@ -1,0 +1,7 @@
+README.md
+{{ if eq .chezmoi.os "darwin" }}
+Library/Application Support/App/file.conf
+{{ end }}
+{{ if eq .chezmoi.os "linux" }}
+.config/app/file.conf
+{{ end }}
