@@ -1,8 +1,8 @@
 {{ if eq .chezmoi.os "linux" -}}
 #!/bin/sh
 #sudo apt install ripgrep
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-curl -sS https://starship.rs/install.sh | sh -s -- -y
+sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sudo curl -sS https://starship.rs/install.sh | sh -s -- -y
 {{ else if eq .chezmoi.os "darwin" -}}
 #!/bin/sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -10,6 +10,6 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 curl -sS https://starship.rs/install.sh | sh -s -- -y
 
 brew bundle --no-lock --file=/dev/stdin <<EOF
-brew "starship"
+brew "neofetch"
 EOF
 {{ end -}}
