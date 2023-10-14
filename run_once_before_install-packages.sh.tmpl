@@ -1,6 +1,6 @@
 {{ if eq .chezmoi.os "linux" -}}
 #!/bin/sh
-sudo apt install wget git
+sudo apt install wget git zsh
 sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 sudo curl -sS https://starship.rs/install.sh | sh -s -- -y
 {{ else if eq .chezmoi.os "darwin" -}}
