@@ -1,12 +1,53 @@
 {{ if eq .chezmoi.os "linux" -}}
 #!/bin/sh
+
+# basic package
+sudo apt install snapd wget git zip jq
+
+# ohmyzsh configs
 git clone https://github.com/wbingli/zsh-wakatime.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-wakatime
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+# starship
 curl -sS https://starship.rs/install.sh | sudo sh -s -- -y
-sudo apt install snapd wget git zip
+
+# node package
 sudo snap install node --classic
 curl -fsSL https://bun.sh/install | bash
+
+# 1password
+curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/amd64 stable main' | sudo tee /etc/apt/sources.list.d/1password.list
+sudo mkdir -p /etc/debsig/policies/AC2D62742012EA22/
+curl -sS https://downloads.1password.com/linux/debian/debsig/1password.pol | sudo tee /etc/debsig/policies/AC2D62742012EA22/1password.pol
+sudo mkdir -p /usr/share/debsig/keyrings/AC2D62742012EA22
+curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
+sudo apt update && sudo apt install 1password
+
+# 1password cli
+sudo -s \
+curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
+sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/$(dpkg --print-architecture) stable main" |
+tee /etc/apt/sources.list.d/1password.list
+mkdir -p /etc/debsig/policies/AC2D62742012EA22/
+curl -sS https://downloads.1password.com/linux/debian/debsig/1password.pol | \
+tee /etc/debsig/policies/AC2D62742012EA22/1password.pol
+mkdir -p /usr/share/debsig/keyrings/AC2D62742012EA22
+curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
+sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
+sudo apt update && sudo apt install 1password-cli
+
+# 1password setup account
+op account add --address $1PASSWORD_SUBDOMAIN.1password.com --email $1PASSWORD_EMAIL
+eval $(op signin --account $1PASSWORD_SUBDOMAIN)
+
+# ssh config
+op read op://Personal/evonne/privatekey > ~/.ssh/$SSH_KEY
+op read op://Personal/evonne/publickey > ~/.ssh/$SSH_KEY.pub
+ssh-add ~/.ssh/$SSH_KEY
+
 {{ else if eq .chezmoi.os "darwin" -}}
 #!/bin/sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
