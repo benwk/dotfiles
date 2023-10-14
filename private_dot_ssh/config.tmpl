@@ -1,0 +1,58 @@
+Host *
+    AddKeysToAgent yes
+    UseKeychain yes
+    IdentityFile ~/.ssh/{{ .ssh.name }}
+Host github.com
+    HostName ssh.github.com
+    Port 443
+    User git
+    ProxyCommand nc -x 127.0.0.1:7890 %h %p
+Host bitbucket.org
+    HostName altssh.bitbucket.org
+    Port 443
+    User git
+    ProxyCommand nc -x 127.0.0.1:7890 %h %p
+Host tm-prod 
+    HostName 47.111.88.33
+    User root
+    Port 77
+Host tm-dev
+    HostName 47.92.3.197
+    User root
+    Port 77
+Host home-local
+    HostName 192.168.10.4
+    User benjamin
+    Port 22
+Host home
+    HostName home.benwk.io
+    User benjamin
+    Port 22
+    ProxyCommand /opt/homebrew/bin/cloudflared access ssh --hostname %h --service-token-id $CF_ACCESS_CLIENT_ID --service-token-secret $CF_ACCESS_CLIENT_SECRET 
+
+# machine-specific configuration
+{{ if eq .chezmoi.os "darwin" }}
+Include ~/.orbstack/ssh/config
+Host bite
+    HostName orb
+    Port 22
+    User bite
+    # replace or symlink ~/.orbstack/ssh/{{ .ssh.name }} file to change the key
+    IdentityFile ~/.orbstack/ssh/{{ .ssh.name }}
+    # only use this key
+    IdentitiesOnly yes
+    ProxyCommand '/Applications/OrbStack.app/Contents/Frameworks/OrbStack Helper.app/Contents/MacOS/OrbStack Helper' ssh-proxy-fdpass {{ .path.home }}
+    ProxyUseFdpass yes
+Host delay
+    HostName orb
+    Port 22
+    User delay
+    # replace or symlink ~/.orbstack/ssh/{{ .ssh.name }} file to change the key
+    IdentityFile ~/.orbstack/ssh/{{ .ssh.name }}
+    # only use this key
+    IdentitiesOnly yes
+    ProxyCommand '/Applications/OrbStack.app/Contents/Frameworks/OrbStack Helper.app/Contents/MacOS/OrbStack Helper' ssh-proxy-fdpass {{ .path.home }}
+    ProxyUseFdpass yes
+{{ end }}
+{{ if eq .chezmoi.os "linux" }}
+{{ end }}

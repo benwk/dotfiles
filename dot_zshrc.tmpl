@@ -1,8 +1,6 @@
-# Fig pre block. Keep at the top of this file.
-[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH="$PATH:/Users/benjamin/.tools"
+export PATH="$PATH:{{ .path.home }}/.tools"
 export LC_ALL=C
 # export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
 
@@ -21,7 +19,7 @@ export CF_ACCESS_CLIENT_ID={{ .cloudflare.clientID }}
 export CF_ACCESS_CLIENT_SECRET={{ .cloudflare.clientSecret }}
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/benjamin/.oh-my-zsh"
+export ZSH="{{ .path.home }}/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -128,26 +126,26 @@ alias setproxysocks5="export all_proxy=socks5://127.0.0.1:7890"
 alias setproxyhttp="export http_proxy=http://127.0.0.1:7890 https_proxy=http://127.0.0.1:7890"
 alias setproxy="export all_proxy=http://127.0.0.1:7890"
 alias unsetproxy="unset all_proxy"
-alias aria2c="aria2c --conf-path=/Users/benjamin/.aria2/aria2.conf -D"
+alias aria2c="aria2c --conf-path={{ .path.home }}/.aria2/aria2.conf -D"
 alias staruml="/Applications/StarUML.app/Contents/MacOS/StarUML"
 
 # Fig post block. Keep at the bottom of this file.
 [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/benjamin/repos/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/benjamin/repos/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '{{ .path.home }}/repos/google-cloud-sdk/path.zsh.inc' ]; then . '{{ .path.home }}/repos/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/benjamin/repos/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/benjamin/repos/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '{{ .path.home }}/repos/google-cloud-sdk/completion.zsh.inc' ]; then . '{{ .path.home }}/repos/google-cloud-sdk/completion.zsh.inc'; fi
 
 # pnpm
-export PNPM_HOME="/Users/benjamin/Library/pnpm"
+export PNPM_HOME="{{ .path.home }}/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 # pnpm end
 
 eval "$(starship init zsh)"
 # bun completions
-[ -s "/Users/benjamin/.bun/_bun" ] && source "/Users/benjamin/.bun/_bun"
+[ -s "{{ .path.home }}/.bun/_bun" ] && source "{{ .path.home }}/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"

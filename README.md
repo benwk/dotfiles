@@ -3,9 +3,12 @@
 ## chezmoi.toml
 
 ```toml
+[data.path]
+  home = ""
+
 [data.git]
-  name = "Ben Z."
-  email = "z@benwk.com"
+  name = ""
+  email = ""
   signingkey = ""
 
 [data.cloudflare]
@@ -31,6 +34,11 @@
 [data.zsh]
   theme = "robbyrussell"
 
+[data.ssh]
+  name = ""
+
 [scriptEnv]
-  MY_VAR = "my_value"
+  OP_SUBDOMAIN = ""
+  OP_EMAIL = ""
+  SSH_KEY = ""
 ```
