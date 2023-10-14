@@ -6,6 +6,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 curl -sS https://starship.rs/install.sh | sudo sh -s -- -y
 sudo apt install snapd wget git
 sudo snap install node --classic
+curl -fsSL https://bun.sh/install | bash
 {{ else if eq .chezmoi.os "darwin" -}}
 #!/bin/sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
