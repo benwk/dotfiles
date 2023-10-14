@@ -40,12 +40,13 @@ sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.g
 sudo apt update && sudo apt install 1password-cli
 
 # 1password setup account
-op account add --address $1PASSWORD_SUBDOMAIN.1password.com --email $1PASSWORD_EMAIL
-eval $(op signin --account $1PASSWORD_SUBDOMAIN)
+op account add --address $OP_SUBDOMAIN.1password.com --email $OP_EMAIL
+eval $(op signin --account $OP_SUBDOMAIN)
 
 # ssh config
 op read op://Personal/evonne/privatekey > ~/.ssh/$SSH_KEY
 op read op://Personal/evonne/publickey > ~/.ssh/$SSH_KEY.pub
+chmod 600 ~/.ssh/evonne_ed25519
 ssh-add ~/.ssh/$SSH_KEY
 
 {{ else if eq .chezmoi.os "darwin" -}}
