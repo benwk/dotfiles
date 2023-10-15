@@ -36,9 +36,13 @@
 
 [data.ssh]
   name = ""
+  proxy = "false"
+  proxyAddress = ""
+  orb = "false"
 
 [scriptEnv]
   OP_SUBDOMAIN = ""
   OP_EMAIL = ""
-  SSH_KEY = ""
+  OP_VAULT = ""
+  OP_SSH = ""
 ```
