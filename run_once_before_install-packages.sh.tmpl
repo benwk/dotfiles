@@ -63,6 +63,9 @@ echo \
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
+echo "Everything Working! 🚀"
+echo "Good Day, Commander!"
+
 {{ else if eq .chezmoi.os "darwin" -}}
 #!/bin/sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
