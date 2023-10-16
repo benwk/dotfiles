@@ -71,8 +71,14 @@ sudo add-apt-repository 'deb https://apt.corretto.aws stable main'
 sudo apt-get update; sudo apt-get install -y java-21-amazon-corretto-jdk maven
 {{   end -}}
 
-echo "Everything Working! 🚀"
-echo "Good Day, Commander!"
+{{   if eq .chezmoi.hostname "delay" -}}
+# go
+sudo apt update
+sudo apt install golang
+{{   end -}}
+
+echo "$(hostname) is ready! 🚀"
+echo "Good Day, Commander! 🫡"
 
 {{ else if eq .chezmoi.os "darwin" -}}
 #!/bin/sh
