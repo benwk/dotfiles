@@ -77,9 +77,6 @@ sudo apt update
 sudo apt install golang
 {{   end -}}
 
-echo "Workspace $(hostname) is ready! 🚀"
-echo "Good Day, Commander! 🫡"
-
 {{ else if eq .chezmoi.os "darwin" -}}
 #!/bin/sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -90,3 +87,6 @@ brew bundle --no-lock --file=/dev/stdin <<EOF
 brew "neofetch"
 EOF
 {{ end -}}
+
+echo "Workspace $(hostname) is ready! 🚀"
+echo "Good Day, Commander! 🫡"
