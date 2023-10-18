@@ -46,3 +46,22 @@
   OP_VAULT = ""
   OP_SSH = ""
 ```
+
+## How to use
+
+### Install chezmoi
+
+```shell
+# macOS
+brew install chezmoi
+# ubuntu
+sudo apt install chezmoi
+```
+
+### Install dotfiles
+
+```shell
+chezmoi init https://github.com/benwk/dotfiles.git
+chezmoi update
+chezmoi apply
+```
